@@ -3,10 +3,54 @@ let compScore = 0;
 
 const choices = document.querySelectorAll(".choice")
 
+const genCompChoice = () => {
+    const options = ["Rock", "paper", "scissors"]
+    const idx = Math.floor(Math.random() * 3)
+    return options[idx]
+}
+
+const drawGame = () => {
+    console.log("Game draw")
+}
+
+const showWinner = (userWin) =>
+{
+    if (userWin) {
+        console.log("you win")
+    }
+    else{
+        console.log("you loose")
+    }
+}
+
+const playGame = (userChoice) => {
+    console.log("user choice : " ,userChoice)
+    const compChoice = genCompChoice()
+    console.log("computer choice " , compChoice)
+
+    if(userChoice === compChoice){
+        drawGame();
+    }
+    else{
+        let userWin = true
+        if(userChoice === "Rock"){
+            userWin = compChoice === "paper"? false : true;
+        }
+        else if(userChoice === "paper"){
+            userWin = compChoice === "scissors" ? false : true;
+        }
+        else{
+            userWin = compChoice === "Rock" ? false : true
+        }
+        showWinner(userWin);
+    }
+}
+
 choices.forEach((choice) => {
     // console.log(choice)
     choice.addEventListener("click" , () =>{
-        const UserChoice = choice.getAttribute("id")
-        console.log("choice was clicked" , choiceId)
+        const userChoice = choice.getAttribute("id")
+        playGame(userChoice)
     })
 })
+
